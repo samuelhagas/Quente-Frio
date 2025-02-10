@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #add8e6; /* Azul claro */
+}
+
+h1 {
+    font-size: 36px;
+}
+
+.quente {
+    color: red;
+}
+
+.frio {
+    color: blue;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #005fa3;
+}
+
+/* Botões de dificuldade agrupados */
+.difficulty-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Botão voltar separado */
+.back-button {
+    background-color: #ff4d4d; /* Vermelho */
+}
+
+.back-button:hover {
+    background-color: #cc0000;
+}
+
+/* Oculta seções inicialmente */
+#menu, #difficulty, #game {
+    margin-top: 100px;
+}
+
+/* Grid flexível */
+.grid-container {
+    display: grid;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.grid-item {
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    border: 2px solid #0077b6;
+    cursor: pointer;
+    transition: background 0.3s;
+}
