@@ -1,26 +1,29 @@
 let correctIndex = 0;
 let currentSize = 4;
 
+/* Exibe a tela de escolha de dificuldade */
 function showDifficulty() {
     document.getElementById("menu").style.display = "none";
-    document.getElementById("difficulty").style.display = "block";
+    document.getElementById("difficulty").style.display = "flex";
 }
 
+/* Retorna ao menu inicial */
 function backToMenu() {
-    document.getElementById("menu").style.display = "block";
+    document.getElementById("menu").style.display = "flex";
     document.getElementById("difficulty").style.display = "none";
     document.getElementById("game").style.display = "none";
 }
 
+/* Inicia o jogo com a grade selecionada */
 function startGame(size) {
     currentSize = size;
     document.getElementById("difficulty").style.display = "none";
-    document.getElementById("game").style.display = "block";
+    document.getElementById("game").style.display = "flex";
 
     const grid = document.querySelector(".grid-container");
     grid.innerHTML = "";
-    grid.style.gridTemplateColumns = `repeat(${size}, 60px)`;
-    grid.style.gridTemplateRows = `repeat(${size}, 60px)`;
+    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
     correctIndex = Math.floor(Math.random() * (size * size));
 
@@ -37,6 +40,7 @@ function startGame(size) {
     }
 }
 
+/* Verifica proximidade e muda cor gradativamente */
 function checkProximity(index, block, size) {
     const correctRow = Math.floor(correctIndex / size);
     const correctCol = correctIndex % size;
@@ -45,8 +49,8 @@ function checkProximity(index, block, size) {
 
     const distance = Math.abs(correctRow - clickedRow) + Math.abs(correctCol - clickedCol);
     const maxDistance = (size - 1) * 2;
-    
     const relativeDistance = distance / maxDistance;
+
     const red = Math.round(255 * (1 - relativeDistance));
     block.style.backgroundColor = `rgb(${red}, 0, ${255 - red})`;
 
