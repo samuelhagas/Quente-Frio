@@ -1,65 +1,65 @@
-let correctIndex = 0; // Armazena a posição do bloco correto
-let currentSize = 4; // Tamanho padrão da grade (4x4)
+let correctIndex = 0; // Índice do bloco correto
+let currentSize = 4; // Tamanho inicial da grade (4x4)
 
-/* Exibe a tela de seleção de dificuldade */
+// Exibe a tela de seleção de dificuldade
 function showDifficulty() {
-    document.getElementById("menu").style.display = "none"; // Esconde o menu inicial
-    document.getElementById("difficulty").style.display = "flex"; // Mostra a tela de dificuldade
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("difficulty").style.display = "block";
 }
 
-/* Volta para o menu inicial */
+// Retorna ao menu principal
 function backToMenu() {
-    document.getElementById("menu").style.display = "flex"; // Exibe o menu inicial
-    document.getElementById("difficulty").style.display = "none"; // Esconde a tela de dificuldade
-    document.getElementById("game").style.display = "none"; // Esconde a tela do jogo
+    document.getElementById("menu").style.display = "block";
+    document.getElementById("difficulty").style.display = "none";
+    document.getElementById("game").style.display = "none";
 }
 
-/* Inicia o jogo com o tamanho da grade selecionado */
+// Inicia o jogo com o tamanho da grade selecionado
 function startGame(size) {
-    currentSize = size; // Define o tamanho da grade atual
-    document.getElementById("difficulty").style.display = "none"; // Esconde a tela de dificuldade
-    document.getElementById("game").style.display = "flex"; // Exibe a tela do jogo
+    currentSize = size;
+    document.getElementById("difficulty").style.display = "none";
+    document.getElementById("game").style.display = "block";
 
     const grid = document.querySelector(".grid-container");
-    grid.innerHTML = ""; // Limpa os blocos anteriores
-    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`; // Define o número de colunas
-    grid.style.gridTemplateRows = `repeat(${size}, 1fr)`; // Define o número de linhas
+    grid.innerHTML = ""; // Limpa a grade anterior
+    grid.style.gridTemplateColumns = `repeat(${size}, 60px)`; // Define colunas
+    grid.style.gridTemplateRows = `repeat(${size}, 60px)`; // Define linhas
 
-    correctIndex = Math.floor(Math.random() * (size * size)); // Sorteia um bloco correto aleatoriamente
+    // Escolhe um bloco aleatório como o correto
+    correctIndex = Math.floor(Math.random() * (size * size));
 
-    // Cria os blocos do jogo
     for (let i = 0; i < size * size; i++) {
-        const block = document.createElement("div"); // Cria um elemento de bloco
-        block.classList.add("grid-item"); // Adiciona a classe CSS ao bloco
-        block.dataset.index = i; // Armazena o índice do bloco
+        const block = document.createElement("div");
+        block.classList.add("grid-item");
+        block.dataset.index = i; // Define o índice do bloco
 
-        // Adiciona um evento de clique no bloco
+        // Adiciona evento de clique para verificar proximidade
         block.addEventListener("click", function() {
-            checkProximity(i, block, size); // Verifica proximidade ao clicar
+            checkProximity(i, block, size);
         });
 
-        grid.appendChild(block); // Adiciona o bloco à grade
+        grid.appendChild(block); // Adiciona bloco à grade
     }
 }
 
-/* Verifica a proximidade do clique em relação ao bloco correto */
+// Verifica a proximidade do clique em relação ao bloco correto
 function checkProximity(index, block, size) {
     const correctRow = Math.floor(correctIndex / size); // Linha do bloco correto
     const correctCol = correctIndex % size; // Coluna do bloco correto
     const clickedRow = Math.floor(index / size); // Linha do bloco clicado
     const clickedCol = index % size; // Coluna do bloco clicado
 
-    // Calcula a distância de Manhattan entre o bloco correto e o clicado
+    // Calcula a distância de Manhattan
     const distance = Math.abs(correctRow - clickedRow) + Math.abs(correctCol - clickedCol);
-    const maxDistance = (size - 1) * 2; // Distância máxima possível na grade
-    const relativeDistance = distance / maxDistance; // Normaliza a distância (0 a 1)
+    const maxDistance = (size - 1) * 2; // Maior distância possível
 
-    // Define a cor do bloco com base na proximidade
-    const red = Math.round(255 * (1 - relativeDistance)); // Quanto mais perto, mais vermelho
-    block.style.backgroundColor = `rgb(${red}, 0, ${255 - red})`; // Azul (frio) → Vermelho (quente)
+    // Define a cor baseada na distância (quente e frio)
+    const relativeDistance = distance / maxDistance;
+    const red = Math.round(255 * (1 - relativeDistance)); // Intensidade de vermelho
+    block.style.backgroundColor = `rgb(${red}, 0, ${255 - red})`; // Define cor entre vermelho e azul
 
-    // Se o jogador acertar o bloco correto
+    // Se for o bloco correto, exibe mensagem de vitória
     if (index === correctIndex) {
-        setTimeout(() => alert("Parabéns! Você encontrou o bloco correto!"), 100); // Exibe mensagem de vitória
+        setTimeout(() => alert("Parabéns! Você encontrou o bloco correto!"), 100);
     }
 }
