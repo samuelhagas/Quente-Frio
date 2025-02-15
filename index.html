@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajusta para telas responsivas -->
     <title>Jogo Quente e Frio</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <!-- Importa o CSS -->
 </head>
 <body>
 
     <!-- Tela do menu inicial -->
     <div id="menu">
         <h1><span class="quente">Quente</span> e <span class="frio">Frio</span></h1>
-        <button onclick="showDifficulty()">Jogar</button>
+        <button onclick="showDifficulty()">Jogar</button> <!-- Mostra a tela de dificuldade -->
     </div>
 
     <!-- Tela de seleção de dificuldade -->
     <div id="difficulty" style="display: none;">
         <h2>Escolha a dificuldade:</h2>
         <div class="difficulty-buttons">
-            <button onclick="startGame(4)">Fácil (4x4)</button>
-            <button onclick="startGame(6)">Normal (6x6)</button>
-            <button onclick="startGame(8)">Difícil (8x8)</button>
+            <button onclick="startGame(4)">Fácil (4x4)</button> <!-- Inicia jogo no modo fácil -->
+            <button onclick="startGame(6)">Normal (6x6)</button> <!-- Inicia jogo no modo normal -->
+            <button onclick="startGame(8)">Difícil (8x8)</button> <!-- Inicia jogo no modo difícil -->
         </div>
-        <button class="back-button" onclick="backToMenu()">Voltar ao Menu</button>
+        <button class="back-button" onclick="backToMenu()">Voltar ao Menu</button> <!-- Retorna ao menu -->
     </div>
 
     <!-- Tela do jogo -->
     <div id="game" style="display: none;">
         <h1>Jogo <span class="quente">Quente</span> e <span class="frio">Frio</span></h1>
         <p>Clique nos blocos e tente acertar o correto!</p>
-        <button onclick="startGame(currentSize)">Reiniciar</button>
-        <button class="back-button" onclick="backToMenu()">Voltar ao Menu</button>
-        <div class="grid-container"></div>
+        <button onclick="startGame(currentSize)">Reiniciar</button> <!-- Reinicia o jogo -->
+        <button class="back-button" onclick="backToMenu()">Voltar ao Menu</button> <!-- Retorna ao menu -->
+        <div class="grid-container"></div> <!-- Container da grade do jogo -->
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js"></script> <!-- Importa o JavaScript -->
 </body>
 </html>
