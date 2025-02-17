@@ -3,11 +3,11 @@ let currentSize = 4; // Tamanho inicial (4x4)
 
 function showDifficulty() {
     document.getElementById("menu").style.display = "none";
-    document.getElementById("difficulty").style.display = "flex";
+    document.getElementById("difficulty").style.display = "block";
 }
 
 function backToMenu() {
-    document.getElementById("menu").style.display = "flex";
+    document.getElementById("menu").style.display = "block";
     document.getElementById("difficulty").style.display = "none";
     document.getElementById("game").style.display = "none";
 }
@@ -15,17 +15,12 @@ function backToMenu() {
 function startGame(size) {
     currentSize = size;
     document.getElementById("difficulty").style.display = "none";
-    document.getElementById("game").style.display = "flex";
+    document.getElementById("game").style.display = "block";
 
     const grid = document.querySelector(".grid-container");
     grid.innerHTML = "";
-    
-    // Calcula o tamanho dos blocos com base no tamanho da tela
-    const gridSize = Math.min(window.innerWidth, window.innerHeight) * 0.8; // 80% da menor dimensão
-    const blockSize = gridSize / size;
-
-    grid.style.gridTemplateColumns = `repeat(${size}, ${blockSize}px)`;
-    grid.style.gridTemplateRows = `repeat(${size}, ${blockSize}px)`;
+    grid.style.gridTemplateColumns = `repeat(${size}, 60px)`;
+    grid.style.gridTemplateRows = `repeat(${size}, 60px)`;
 
     // Escolhe um bloco aleatório como o correto (0 a size*size - 1)
     correctIndex = Math.floor(Math.random() * (size * size));
@@ -62,10 +57,3 @@ function checkProximity(index, block, size) {
         setTimeout(() => alert("Parabéns! Você encontrou o bloco correto!"), 100);
     }
 }
-
-// Adiciona um listener para redimensionar o grid quando a janela for redimensionada
-window.addEventListener("resize", () => {
-    if (document.getElementById("game").style.display === "flex") {
-        startGame(currentSize);
-    }
-});
